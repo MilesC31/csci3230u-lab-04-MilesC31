@@ -54,18 +54,15 @@ export function sameBlock(r1, c1, r2, c2) {
 
 /** Read the value at (row, col): a digit 1-9, or EMPTY (-1). */
 export function getCell(board, row, col) {
-  // TODO: return the value stored at board[row][col]
   return board[row][col]
 }
 
 /**
  * Return a NEW board with (row, col) set to `value`, WITHOUT mutating the
  * board you were given. (Immutability is what makes "undo" easy in Lab 05.)
- * Hint: `board.map(...)` builds a new array - map the target row, and inside
- * that row map the target column.
  */
 export function setCell(board, row, col, value) {
-  // TODO: return a new 9x9 board with exactly one cell changed
+  // return a new 9x9 board with exactly one cell changed
   const newBoard = board.map((n, i) => i === row ? n.map((cell, j) => (j === col ? value : cell)) : n)
   return newBoard 
 }
@@ -80,7 +77,7 @@ export function setCell(board, row, col, value) {
  * differs; keep the ones that share a row/column/block (the helpers above).
  */
 export function findConflicts(board, row, col) {
-  // TODO: return an array of [row, col] pairs that conflict with (row, col)\
+  // return an array of [row, col] pairs that conflict with (row, col)\
   const conflicts = []
   if (getCell(board, row, col) === EMPTY) {
     return conflicts
@@ -102,7 +99,6 @@ export function findConflicts(board, row, col) {
 
 /** True when every cell is filled (no EMPTY) and nothing conflicts. */
 export function isComplete(board) {
-  // TODO: false if any cell is EMPTY or has conflicts; otherwise true
   for (let i = 0; i < board.length; i++) {
     for (let j = 0; j < board[i].length; j++) {
       if (getCell(board, i, j) === EMPTY || findConflicts(board, i, j).length > 0){
@@ -120,24 +116,20 @@ export function isComplete(board) {
 
 /** Format seconds as "m:ss" (e.g. 171 -> "2:51"). */
 export function formatDuration(durationSeconds) {
-  // TODO: whole minutes, then zero-padded seconds.
-  // Hint: String(n).padStart(2, '0')
   const minutes = Math.floor(durationSeconds/60);
-  const seconds = String(durationSeconds % 60).padStart(2, '0');
+  const seconds = String(durationSeconds % 60).padStart(2, '0')
   return minutes + ":" + seconds
 }
 
 /** Format a Date as "YYYY/MM/DD" (e.g. "2021/03/02"). */
 export function formatDate(date) {
-  // TODO: getFullYear(), getMonth() + 1, getDate() - month/day zero-padded
    return date.getFullYear() + "/" + String(date.getMonth() + 1).padStart(2, '0') + "/" + String(date.getDate()).padStart(2, '0')
 }
 
 /** A NEW array of scores sorted fastest-first, without mutating the input. */
 export function sortScores(scores) {
-  // TODO: copy the array, then sort by durationSeconds ascending.
-  // Hint: [...scores] makes a copy so the original is left untouched.
+  // copies the array, then sort by durationSeconds ascending.
   const sorted = [...scores]
-  sorted.sort((a, b) => a.durationSeconds - b.durationSeconds);
+  sorted.sort((a, b) => a.durationSeconds - b.durationSeconds)
   return sorted;
 }
